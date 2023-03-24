@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import SearchBar from './components/SearchBar/SearchBar';
 import youtube from './apis/youtube';
+import VideoList from './components/VideoList/VideoList';
 
 class App extends Component {
-  state = { videos: [] };
+  state = { videos: [], selectedVideo: null };
 
   onTermSubmit = async (term) => {
     try {
@@ -17,10 +18,19 @@ class App extends Component {
       console.log(error);
     }
   };
+
+  onVideoSelected = (video) => {
+    console.log(video);
+  };
+
   render() {
     return (
       <div className="ui container">
         <SearchBar onFormSubmit={this.onTermSubmit} />
+        <VideoList
+          videos={this.state.videos}
+          selectedVideoList={this.onVideoSelected}
+        />
       </div>
     );
   }
