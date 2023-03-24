@@ -12,7 +12,10 @@ class App extends Component {
       const response = await youtube.get('/search', {
         params: { q: term },
       });
-      this.setState({ videos: response.data.items });
+      this.setState({
+        videos: response.data.items,
+        selectedVideo: response.data.items[0],
+      });
     } catch (error) {
       console.log(error);
     }
@@ -22,6 +25,10 @@ class App extends Component {
     this.setState({ selectedVideo: video });
     console.log(video);
   };
+
+  componentDidMount() {
+    this.onTermSubmit('Building Information Modeling');
+  }
 
   render() {
     return (
